@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <import type="android.view.View"/>
         <variable
             name="navBarPadding"
             type="Integer" />
+
+        <variable
+            name="isEmpty"
+            type="Boolean" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -34,7 +39,7 @@
         app:layout_constraintTop_toTopOf="@id/tv_title"
         app:layout_constraintStart_toEndOf="@id/tv_title"
         android:text="@string/title_empty"
-        android:visibility="gone"
+        android:visibility="@{isEmpty? View.VISIBLE: View.GONE, default= gone}"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -46,6 +51,7 @@
         android:focusable="true"
         android:layout_marginTop="@dimen/text_top_padding"
         app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:visibility="@{isEmpty? View.GONE: View.VISIBLE, default= gone}"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

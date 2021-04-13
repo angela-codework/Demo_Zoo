@@ -65,25 +65,29 @@ class SectionDetailFragment : FragmentBase(), IItemClickListener {
 
     //show recycler view after fragment transit animation is end
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
-        val anim: Animation = AnimationUtils.loadAnimation(activity, nextAnim)
+        if(nextAnim == 0)  {
+            setRecyclerView()
+        } else {
+            val anim: Animation = AnimationUtils.loadAnimation(activity, nextAnim)
 
-        anim.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {}
+            anim.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
 
-            override fun onAnimationRepeat(animation: Animation) {}
+                override fun onAnimationRepeat(animation: Animation) {}
 
-            override fun onAnimationEnd(animation: Animation) {
-                setRecyclerView()
-            }
-        })
-        return anim
+                override fun onAnimationEnd(animation: Animation) {
+                    setRecyclerView()
+                }
+            })
+            return anim
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim)
+
     }
 
     //show empty view if recyclerview is empty
     private fun verifyEmptyView(itemCount: Int) {
-        if(itemCount == 0) {
-            binding.tvEmpty.visibility = View.VISIBLE
-        }
+        binding.isEmpty = itemCount == 0
     }
 
     //bind data

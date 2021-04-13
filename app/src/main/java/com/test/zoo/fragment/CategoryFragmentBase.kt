@@ -46,18 +46,24 @@ abstract class CategoryFragmentBase : FragmentBase(),
 
     //show recycler view after fragment transit animation is end
     override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
-        val anim: Animation = AnimationUtils.loadAnimation(activity, nextAnim)
+        if(nextAnim == 0)  {
+            setRecyclerView()
+        } else {
+            val anim: Animation = AnimationUtils.loadAnimation(activity, nextAnim)
 
-        anim.setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(animation: Animation) {}
+            anim.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
 
-            override fun onAnimationRepeat(animation: Animation) {}
+                override fun onAnimationRepeat(animation: Animation) {}
 
-            override fun onAnimationEnd(animation: Animation) {
-                setRecyclerView()
-            }
-        })
-        return anim
+                override fun onAnimationEnd(animation: Animation) {
+                    setRecyclerView()
+                }
+            })
+            return anim
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim)
+
     }
 
     //bind data
