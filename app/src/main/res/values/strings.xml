@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Zoo</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="home_fragment_label">Home Fragment</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="third_fragment_label">Third Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="title_home">"台北市立動物園"</string>
+    <string name="title_no_memo">"無休館資訊"</string>
+    <string name="menu_indoor">"室內區"</string>
+    <string name="menu_outdoor">"戶外區"</string>
+    <string name="menu_zoo_info">"園區介紹"</string>
+    <string name="menu_home">"首頁"</string>
+
+    <string name="title_name_en">"英文名"</string>
+    <string name="title_also_known">"別名"</string>
+    <string name="title_brief">"簡介"</string>
+    <string name="title_plant">"種植方式"</string>
+    <string name="title_function">"功能性"</string>
+    <string name="title_update_date">"最近更新"</string>
+    <string name="title_plant_list">"植物資料"</string>
+    <string name="title_empty">" : 無資料。"</string>
+</resources>

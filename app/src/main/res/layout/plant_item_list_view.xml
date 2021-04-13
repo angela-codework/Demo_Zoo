@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="infoItem"
+            type="com.test.zoo.database.PlantTuple" />
+
+        <variable
+            name="clickListener"
+            type="com.test.zoo.interfaces.IItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_height"
+        android:paddingStart="@dimen/text_top_padding"
+        android:paddingEnd="@dimen/text_top_padding"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="@{() -> clickListener.onItemClick(infoItem)}">
+
+        <ImageView
+            android:id="@+id/iv_title"
+            android:layout_width="@dimen/list_item_img_width"
+            android:layout_height="@dimen/list_item_img_height"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:imgUrl="@{infoItem.pic1Url}"
+             />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{infoItem.name}"
+            android:layout_marginStart="@dimen/text_top_padding"
+            app:layout_constraintTop_toTopOf="@+id/iv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_title"
+            android:textAppearance="@style/TitleTextAppearance"
+            />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/list_item_text_height"
+            android:layout_marginTop="@dimen/text_top_padding"
+            android:text="@{infoItem.alsoKnown}"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
