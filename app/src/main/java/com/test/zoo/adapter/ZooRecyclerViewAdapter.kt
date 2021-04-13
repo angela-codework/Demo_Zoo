@@ -1,13 +1,19 @@
 package com.test.zoo.adapter
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.test.zoo.R
 import com.test.zoo.database.ZooInfo
 import com.test.zoo.databinding.ItemListViewBinding
 import com.test.zoo.interfaces.IItemClickListener
+
 
 /**
  * List all zoo section by indoor/outdoor.
@@ -49,5 +55,11 @@ class ZooRecyclerViewAdapter(private val listener: IItemClickListener): PagedLis
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position) as ZooInfo
         holder.bind(item)
+        loadItemAnim(holder.itemView)
+    }
+
+    //set item show animation
+    private fun loadItemAnim(view: View) {
+        view.animation = AnimationUtils.loadAnimation(view.context, R.anim.list_anim)
     }
 }

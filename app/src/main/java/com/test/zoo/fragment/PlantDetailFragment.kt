@@ -38,6 +38,7 @@ class PlantDetailFragment : FragmentBase() {
 
     //bind data
     private fun updateBindingData() {
+        //bind list item content
         binding.plantInfo = data
     }
 

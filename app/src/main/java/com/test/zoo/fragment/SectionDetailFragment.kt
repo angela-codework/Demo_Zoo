@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.test.zoo.interfaces.IItemClickListener
@@ -44,7 +46,6 @@ class SectionDetailFragment : FragmentBase(), IItemClickListener {
     ): View? {
         binding = FragmentSecondBinding.inflate(inflater, container, false)
         updateBindingData()
-        setRecyclerView()
         return binding.root
     }
 
@@ -62,6 +63,22 @@ class SectionDetailFragment : FragmentBase(), IItemClickListener {
         })
     }
 
+    //show recycler view after fragment transit animation is end
+    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
+        val anim: Animation = AnimationUtils.loadAnimation(activity, nextAnim)
+
+        anim.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation) {}
+
+            override fun onAnimationRepeat(animation: Animation) {}
+
+            override fun onAnimationEnd(animation: Animation) {
+                setRecyclerView()
+            }
+        })
+        return anim
+    }
+
     //show empty view if recyclerview is empty
     private fun verifyEmptyView(itemCount: Int) {
         if(itemCount == 0) {
@@ -71,7 +88,9 @@ class SectionDetailFragment : FragmentBase(), IItemClickListener {
 
     //bind data
     private fun updateBindingData() {
+        //bind list item content
         binding.titleLayout.zooInfo = data
+        //bind data to ensure recyclerview above navigation bar
         binding.navBarPadding = navigationBarHeight
     }
 
