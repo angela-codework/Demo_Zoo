@@ -1,12 +1,11 @@
 package com.test.zoo.fragment
 
-import androidx.fragment.app.Fragment
 import com.test.zoo.R
 
 /**
  * A fragment extends from CategoryFragment to show zoo outdoor sections.
  */
-class OutDoorCategoryFragment : CategoryFragmentBase() {
+class OutDoorCategoryRVFragment : CategoryRVFragmentBase() {
     //toolbar title
     override val title: String
         get() = requireContext().getString(R.string.menu_outdoor)

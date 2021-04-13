@@ -1,15 +1,11 @@
 package com.test.zoo.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import com.test.zoo.interfaces.IItemClickListener
 import com.test.zoo.adapter.PlantRecyclerViewAdapter
 import com.test.zoo.database.ZooInfo
 import com.test.zoo.databinding.FragmentSecondBinding
@@ -17,13 +13,12 @@ import com.test.zoo.model.ZooModelFactory
 import com.test.zoo.model.ZooViewModel
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.test.zoo.R
 
 /**
  * A fragment extends from FragmentBase and show zoo section detail.
  */
-class SectionDetailFragment : FragmentBase(), IItemClickListener {
+class SectionDetailFragment : RVFragmentBase() {
 
     //toolbar title
     override val title: String
@@ -49,45 +44,24 @@ class SectionDetailFragment : FragmentBase(), IItemClickListener {
         return binding.root
     }
 
-    private fun setRecyclerView() {
+    override fun setRecyclerView() {
         //set recyclerview adapter
         binding.rvMain.adapter = viewAdapter
         //observe and submit query result to paged-list adapter
         viewModel.plantList.observe(requireActivity(), Observer(viewAdapter::submitList))
         //check if recyclerview is empty then show empty view
-        viewAdapter.registerAdapterDataObserver(object: RecyclerView.AdapterDataObserver(){
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                verifyEmptyView(itemCount)
-                super.onItemRangeInserted(positionStart, itemCount)
-            }
-        })
     }
 
-    //show recycler view after fragment transit animation is end
-    override fun onCreateAnimation(transit: Int, enter: Boolean, nextAnim: Int): Animation? {
-        if(nextAnim == 0)  {
-            setRecyclerView()
-        } else {
-            val anim: Animation = AnimationUtils.loadAnimation(activity, nextAnim)
-
-            anim.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
-
-                override fun onAnimationRepeat(animation: Animation) {}
-
-                override fun onAnimationEnd(animation: Animation) {
-                    setRecyclerView()
-                }
-            })
-            return anim
-        }
-        return super.onCreateAnimation(transit, enter, nextAnim)
-
-    }
-
-    //show empty view if recyclerview is empty
-    private fun verifyEmptyView(itemCount: Int) {
+    override fun verifyEmptyView(itemCount: Int) {
         binding.isEmpty = itemCount == 0
+    }
+
+    override fun registerAdapterListener() {
+        viewAdapter.registerAdapterDataObserver(dataObserver)
+    }
+
+    override fun unregisterAdapterListener() {
+        viewAdapter.unregisterAdapterDataObserver(dataObserver)
     }
 
     //bind data

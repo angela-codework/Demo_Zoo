@@ -15,7 +15,7 @@
 
     <fragment
         android:id="@+id/ZooOutDoorFragment"
-        android:name="com.test.zoo.fragment.OutDoorCategoryFragment"
+        android:name="com.test.zoo.fragment.OutDoorCategoryRVFragment"
         android:label="@string/menu_outdoor"
         tools:layout="@layout/fragment_first">
 
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/ZooInDoorFragment"
-        android:name="com.test.zoo.fragment.InDoorCategoryFragment"
+        android:name="com.test.zoo.fragment.InDoorCategoryRVFragment"
         android:label="@string/menu_indoor"
         tools:layout="@layout/fragment_first">
 
